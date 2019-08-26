@@ -1,0 +1,54 @@
+## Overview
+EVT, as the native token on everiToken public chain, serves multiple key purposes such as being the fuel or as rewards for Block Producers. In order to trade EVT on Binance Chain (a decentralized exchange from Binance) where only [BEP-2](https://github.com/binance-chain/BEPs/blob/master/BEP2.md) compatible tokens are supported, there must be an easy and reliable way to swap tokens between these two chains.
+
+The native token of everiToken on Binance Chain is [**EVT-49B**](https://explorer.binance.org/asset/EVT-49B). To facilitate the swapping process between EVT (everiToken public chain) and EVT-49B (BEP-2 Binance Chain), we have built a [bridge](https://github.com/everitoken/evt-bnb-dex-bridge) that enables token holders from either chain to easily swap their tokens.
+
+## How does the bridge work?
+The bridge is a service run officially by everiToken. Its core function is to monitor confirmed transactions from both everiToken public chain and Binance chain for any transaction that is deemed as a swap transaction and perform action on it.
+
+everiToken defines two addresses used by the bridge. They are the swap addresses. Any transaction sent to these two addresses with their respective native token is considered as a swap transaction. The bridge will detect them, check their validity and finish the swap process.
+
+The receiving address for the swap transaction are
+
+* everiToken public chain: `EVT5NYzcUjJEpGunhJJZmw8r2qph2uDhGBkhCWSJTp3Nv3VQ7aLT3`
+* Binance chain: `bnb1v3fl4kuwuhzf3g7ghscsq7uzmu5dw50waseptd`
+
+> Swap via the Bridge between EVT and EVT-49B in either direction will cost 1 EVT as fee.
+
+## Convert EVT to EVT-49B
+If you are an EVT holder, and you want to trade EVT on Binance Chain. You have to convert EVT to EVT-49B. The procedure is as follows:
+
+> You must have an account on Binance Chain, if not, you can get one by visiting [here](https://www.binance.org/en/create).
+
+1. Initialize a transfer on any wallet that is compatible everiToken
+2. In **To** field, put in `EVT5NYzcUjJEpGunhJJZmw8r2qph2uDhGBkhCWSJTp3Nv3VQ7aLT3`
+3. In **Memo** field, put in your own address on Binance Chain (e.g. bnbxxxxxxx)
+4. In **Amount** field, put in the amount you want to swap
+
+If this transfer transaction is confirmed on everiToken public chain, the bridge will transfer the specified amount to your Binance chain account (specified in the **memo** field).
+
+The conversion rate is 1:1, which means 1 EVT on everiToken public chain is equivalent to 1 EVT-49B on Binance chain.
+
+
+## Convert EVT-49B back to EVT
+If you are a holder of EVT-49B token on Binance chain, and need to convert back to EVT. The procedure is as follows:
+
+1. Initialize a transfer on any wallet that is compatible with BEP-2 token
+2. In **To** field, put in `bnb1v3fl4kuwuhzf3g7ghscsq7uzmu5dw50waseptd`
+3. In **Memo** field, put in your own address on everiToken public chain (e.g. EVTxxxxxx)
+4. In **Amount** field, put in the amount you want to swap
+
+If this transfer transaction is confirmed on Binance chain, the bridge will transfer the specified amount to your everiToken public chain account (specified in the **memo** field). 
+
+The conversion rate is also 1:1.
+
+## Summary
+With the help of the bridge, swapping token between everiToken public chain and Binance chain becomes a frictionless and transparent process. Sending tokens to predefined swap address and specifing the beneficiary address in the memo field will instruct the bridge to finish the swap process.
+
+
+## Useful resources
+* [Bridge source code on GitHub](https://github.com/everitoken/evt-bnb-dex-bridge)
+* [EVT-49B on Binance Chain](https://explorer.binance.org/asset/EVT-49B)
+* Swap address on everiToken: `EVT5NYzcUjJEpGunhJJZmw8r2qph2uDhGBkhCWSJTp3Nv3VQ7aLT3`
+* Swap address on Binance chain: `bnb1v3fl4kuwuhzf3g7ghscsq7uzmu5dw50waseptd`
+
